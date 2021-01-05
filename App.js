@@ -4,8 +4,8 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 
 import Loading from './Loading';
-
-const API_KEY = '984d1dce34ea89c1cf26a4eef187b1c2';
+import { API_KEY } from './key';
+import Weather from './Weather';
 
 class App extends React.Component {
   state = {
@@ -13,8 +13,13 @@ class App extends React.Component {
   }
 
   getWeather = async(latitude, longitude) => {
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
     const { data } = await axios.get(url);
+
+    this.setState({
+      isLoading: false,
+      temp: data.main.temp,
+    })
 
     console.log(data);
   }
@@ -25,7 +30,6 @@ class App extends React.Component {
       const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync();
       
       this.getWeather(latitude, longitude);
-      this.setState({ isLoading: false });
     } catch (err) {
       console.error(err);
       Alert.alert("Can't find you", "So Sad");
@@ -37,9 +41,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, temp } = this.state;
 
-    return isLoading ? <Loading /> : null;
+    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)} />;
   }
 }
 
