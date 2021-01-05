@@ -39,7 +39,7 @@ div -> View
 span -> Text
 ```
 
-
+---
 
 ## ECONNRESET error
 
@@ -69,4 +69,11 @@ const styles = StyleSheet.create({
 
 - 일반 css와는 다르게 View태그에서 color를 주면 먹히지 않는다.
 - 직접 Text태그에 color를 줘야한다.
+
+---
+
+```
+웹 - flexDirection default: row
+앱 - flexDirection default: column
+```
 
