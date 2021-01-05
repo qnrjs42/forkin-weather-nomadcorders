@@ -34,19 +34,39 @@ npm run ios
 
 ---
 
-## live reloading
-
 ```
-
-```
-
-
-
-## hot reloading
-
-```
-
+div -> View
+span -> Text
 ```
 
 
+
+## ECONNRESET error
+
+-> expo kill, npm start
+
+---
+
+```jsx
+<View style={styles.container}>
+    <Text style={styles.text}>Hello</Text>
+    <StatusBar style="auto" />
+</View>
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'white',
+    width: '100%'
+  },
+});
+```
+
+- 일반 css와는 다르게 View태그에서 color를 주면 먹히지 않는다.
+- 직접 Text태그에 color를 줘야한다.
 
